@@ -1,0 +1,162 @@
+
+.size{
+    font-size:12px;
+}
+
+.size1{
+    font-size:14px;
+}
+
+.size2{
+    font-size:16px;
+}
+
+.size3{
+    font-size:18px;
+}
+
+.size4{
+    font-size:20px;
+}
+/* css topbar2*/
+   
+/* css writte article*/
+    /*input file*/
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+
+    #img-upload{
+        width: 100%;
+    }
+
+    .form2{
+        border-top:white;
+        border-left:white;
+        border-right:white;
+    }
+    /* chexkbox */
+
+    .material-switch > input[type="checkbox"] {
+        display: none;   
+    }
+    
+    .material-switch > label {
+        cursor: pointer;
+        position: relative;   
+    }
+    
+    .material-switch > label::before {
+        background: rgb(0, 0, 0);
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        content: '';
+        height: 16px;
+        margin-top: -8px;
+        position:absolute;
+        opacity: 0.3;
+        transition: all 0.4s ease-in-out;
+        width: 40px;
+    }
+    .material-switch > label::after {
+        background: rgb(255, 255, 255);
+        border-radius: 16px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        content: '';
+        height: 24px;
+        left: -4px;
+        margin-top: -8px;
+        position: absolute;
+        top: -4px;
+        transition: all 0.3s ease-in-out;
+        width: 24px;
+    }
+    .material-switch > input[type="checkbox"]:checked + label::before {
+        background: inherit;
+        opacity: 0.5;
+    }
+    .material-switch > input[type="checkbox"]:checked + label::after {
+        background: inherit;
+        left: 20px;
+    }  
+
+/* css config */
+    .form{
+        width:100%;
+        border-top:1px solid white;
+        border-right:1px solid white;
+        border-left:1px solid white;
+        border-bottom:1px solid black;
+    }
+    .form:focus{
+        border-bottom:3px solid #17A2B8;
+        background:#e5fbff;
+    }
+/*css tableau des medias*/
+    /*part films*/
+
+    .table th{
+        padding:0.30rem;
+        font-size:16px;
+    }
+    .table td{
+        font-size:14px;
+        padding:0.30rem;
+    }
+    .th1{
+        width:5%;
+    }
+    .th2{
+        width:10%;    
+    }
+    .th3{
+        width:30%;  
+    }
+    .th4{
+        width:20%;
+    }
+    .th5{
+        width:10%;
+    }
+    .th6{
+        width:10%;
+    }
+    .th7{
+        width:15%;  
+    }
+    .imdb{
+        width:50%;
+    }
+
+    .language{
+        width:25%;
+    }
+
+/*css info movie*/
+
+    .thInf1{
+        width:20%;
+    }
+    .thInf2{
+        width:20%;    
+    }
+    .thInf3{
+        width:60%;  
+    }
+

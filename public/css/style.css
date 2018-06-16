@@ -1,0 +1,17 @@
+/*mini reset*/
+a, a:link, a:hover {
+    text-decoration: none!important;
+    }
+
+/*page home*/
+    .table th,
+    .table td {
+        padding: 0.30rem;
+        font-size:14px;
+    }
+
+    #homeDateFilm img{
+        width:100%;
+        height:50%;
+    }
+
