@@ -2,10 +2,10 @@
 <?php $title = "Films"?>
 
 <?php ob_start(); ?>   
-
+<?php include('body/topbar2.php');?>
 <section>
     <div class="container">
-        <?php include('body/adddashboard.php')?>
+        <?php include('body/media.php')?>
 
         <div class="alert alert-danger" id="danger" style="visibility:hidden;" role="alert">Tous les champs ne sont pas remplies</div> 
 
@@ -13,16 +13,6 @@
         <div class="clearfix mb-1">
             <p class="ml-3 float-left">Retrouvé tous vos films</p>           
             <div class="float-right mr-2">
-
-                <script>
-                    function send() {
-                        var DSLScript  = document.createElement("script");
-                        DSLScript.src  = "public/js/addMovie.js";
-                        DSLScript.type = "text/javascript";
-                        document.body.appendChild(DSLScript);
-                        document.body.removeChild(DSLScript);
-                    }
-                </script>
 
                 <!--icon add link movie -->
                 <a href="" class="mr-1" title="ajouter liens du film" data-toggle="modal" data-target="#addLink"><i class="fas fa-link fa-lg text-white p-2 bg-success"></i></a>
@@ -56,7 +46,7 @@
                                 <form method="post">
                                     <div class="form-group d-flex ">                        
                                         <input type="text" placeholder="Code IMDB" class="form-control imdb" id="imdbLink" >
-                                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="importer info IMDB" id="valImdbLink" onclick="send()">
+                                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="importer info IMDB" id="valImdbLink">
                                             <i class="fa fa-check-circle fa-lg text-white"></i>
                                         </button>  
                                     </div>
@@ -111,11 +101,9 @@
                                 <!--if click on add-->
                                 <?php
                                 if(isset($_POST['postFilm'])){
-                                    $imdb = htmlspecialchars(trim($_POST['imdb']));
                                     $title =htmlspecialchars(trim($_POST['title']));
                                     $kind = htmlspecialchars(trim($_POST['kind']));
                                     $exit = htmlspecialchars(trim($_POST['year']));
-                                    $tagline = htmlspecialchars(trim($_POST['tagline']));
                                     $image = htmlspecialchars(trim($_POST['image']));
                                     $note = htmlspecialchars(trim($_POST['note']));
                                     $ba = htmlspecialchars(trim($_POST['ba']));
@@ -123,17 +111,17 @@
                                     $acteurs = htmlspecialchars(trim($_POST['acteur']));
                                     $synops= htmlspecialchars(trim($_POST['synops']));    
                                 
-                                    if(empty($title) OR empty($kind) OR empty($exit) OR empty($tagline) OR empty($image) OR
+                                    if(empty($title) OR empty($kind) OR empty($exit) OR empty($image) OR
                                     empty($note) OR empty($ba) OR empty($prod) OR empty($acteurs) OR empty($synops)){
                                         ?> 
                                         <script>
-                                        var dangerElmt = document.getElementById("danger");
-                                        dangerElmt.style.visibility ='visible';    
+                                            var dangerElmt = document.getElementById("danger");
+                                            dangerElmt.style.visibility ='visible';    
                                         </script>
                                         <?php
                                     }
                                     else{
-                                        add_Film($imdb,$title,$kind,$exit,$tagline,$image,$note,$ba,$prod,$acteurs,$synops);  
+                                        add_Film($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops);  
                                     }
                                 }
 
@@ -141,7 +129,7 @@
                                 <form method="post">
                                     <div class="form-group d-flex ">                        
                                         <input type="text" placeholder="Code IMDB" class="form-control imdb" id="imdbMovie">
-                                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="importer info IMDB" id="valImdb" onclick="send()">
+                                        <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="right" title="importer info IMDB" id="valImdb">
                                             <i class="fa fa-check-circle fa-lg text-white"></i>
                                         </button>  
                                     </div>
@@ -153,9 +141,6 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" placeholder="Année" class="form-control erase" name="year" id="year">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Tagline" class="form-control erase" name="tagline" id="tagline">
                                     </div>
                                     <div class="form-group">
                                         <input type="text" placeholder="Image" class="form-control erase" name="image" id="image">
@@ -186,15 +171,16 @@
                     </div>
                 </div>
             </div>
-            <?php
-            ?>
+    
+
+           
             <div class="mr-2 float-right">
-                <form method="post">                
+                <form method="post" action="index.php?page=addFilms" id="searchMovieBa">                
                     <div class="input-group px-5" style="">
-                        <input type="search" name="search" id="searchMovieBa" class="form-control">
+                        <input type="search" name="search" id="search" class="form-control" >
                         
                     <div class="input-group-append">
-                        <button type="submit" class="btn btn-warning" name="submit">
+                        <button type="submit" class="btn btn-warning">
                             <span><i class="fas fa-search text-dark"></i></span>
                         </button>         
                     </div>
@@ -210,8 +196,7 @@
                     <th class="th3" scope="col">Synopsis</th>
                     <th class="th4" scope="col">Genre</th>
                     <th class="th5" scope="col">Année</th>
-                    <th class="th6" scope="col">Imdb</th>
-                    <th class="th7" scope="col">Action</th>
+                    <th class="th6" scope="col">Action</th>
                 </tr>
             </thead>
             <?php 
@@ -225,8 +210,7 @@
                     <td><?= htmlspecialchars($postFilm['title'])?></td>
                     <td><?= substr(htmlspecialchars($postFilm['synopsis']),0,100)?>...</td>
                     <td><?= htmlspecialchars($postFilm['kind'])?></td>
-                    <td><?= date('d/m/y' ,strtotime($postFilm['datesortie']))?></td>
-                    <td><?= htmlspecialchars($postFilm['imdb'])?></td>
+                    <td><?= htmlspecialchars($postFilm['datesortie'])?></td>
 
                    
                     <td>
@@ -250,7 +234,6 @@
                                             $title =htmlspecialchars(trim($_POST['titleUpMovie']));
                                             $kind = htmlspecialchars(trim($_POST['kindUpMovie']));
                                             $exit = htmlspecialchars(trim($_POST['yearUpMovie']));
-                                            $tagline = htmlspecialchars(trim($_POST['taglineUpMovie']));
                                             $image = htmlspecialchars(trim($_POST['imageUpMovie']));
                                             $note = htmlspecialchars(trim($_POST['noteUpMovie']));
                                             $ba = htmlspecialchars(trim($_POST['baUpMovie']));
@@ -258,7 +241,7 @@
                                             $acteurs = htmlspecialchars(trim($_POST['acteurUpMovie']));
                                             $synops= htmlspecialchars(trim($_POST['synopsUpMovie']));    
                                         
-                                            if(empty($title) OR empty($kind) OR empty($exit) OR empty($tagline) OR empty($image) OR
+                                            if(empty($title) OR empty($kind) OR empty($exit) OR empty($image) OR
                                             empty($note) OR empty($ba) OR empty($prod) OR empty($acteurs) OR empty($synops)){
                                                 ?> 
                                                 <script>
@@ -268,7 +251,7 @@
                                                 <?php
                                             }
                                             else{
-                                                update_Film($title,$kind,$exit,$tagline,$image,$note,$ba,$prod,$acteurs,$synops,$filmId);  
+                                                update_Film($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops,$filmId);  
                                             }
                                         }         
                                         ?>
@@ -285,9 +268,6 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" placeholder="Année" class="form-control" name="yearUpMovie" id="" value="<?=htmlspecialchars($postFilm['datesortie'])?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="text" placeholder="Tagline" class="form-control" name="taglineUpMovie" id="" value="<?=htmlspecialchars($postFilm['tagline'])?>">
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" placeholder="Image" class="form-control" name="imageUpMovie" id="" value="<?=htmlspecialchars($postFilm['image'])?>">
@@ -318,7 +298,7 @@
                             </div>
                         </div>
                         <!--icon page info-->
-                        <a href="index.php?page=movies&amp;title=<?=$postFilm['title']?>" class="ml-1" title="ajouter liens du film"><i class="fas fa-info-circle fa-lg text-warning"></i> </a>
+                        <a href="index.php?page=moviesInfo&amp;title=<?=$postFilm['title']?>" class="ml-1" title="ajouter liens du film"><i class="fas fa-info-circle fa-lg text-warning"></i> </a>
                         
                         <!--icon delete-->
                         <a href="" class="ml-1" title="supprimer film" data-toggle="modal" data-target="#delete<?=$postFilm['id']?>"><i class="fas fa-trash-alt fa-lg text-danger"></i></a>
@@ -361,21 +341,75 @@
             ?>
         </table>
     </div>
-    <?php
-$url = "https://api.themoviedb.org/3/movie/tt1431045?api_key=3f531cbbcdf04ba2affab6f4e07dfd0d&language=fr";
-$urlImg="https://image.tmdb.org/t/p/original";
-$json_response = file_get_contents($url);
-$object_response = json_decode($json_response);
- 
-$poster_url="";
-if(!is_null($object_response) && isset($object_response->poster_path)) {
-$poster_url = $object_response->poster_path;
-?><img src="<?= $urlImg.$poster_url ?>" alt="" width="200" height="100"> 
-<?php
-}
-?>
+    <!-- pagination of the board -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <nav aria-label="Page navigation example">               
+            <ul class="pagination">
+                <!--decrease harrow left-->
+                <?php if (isset($_GET["p"]) && $_GET['p']>1 && $_GET['p']<=$nbPages) {
+                    ?>
+                <li class="page-item">
+                    <a class="page-link" href="index.php?page=addFilms&amp;p=<?=$_GET["p"]-1?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <?php
+                }
+                else{
+                ?>
+                <li class="page-item">
+                    <a class="page-link" href="index.php?page=addFilms&amp;p=<?=$_GET["p"]=1?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <?php
+                }
+                ?>
+                <!--number pagination-->
+                <?php
+                for($i=1; $i<=$nbPages; $i++){
+                ?>
+                    <li class="page-item"><a class="page-link" href="index.php?page=addFilms&amp;p=<?=$i?>"><?=$i?></a></li>
+                <?php
+                }
+                ?>
+                <!--increase harrow right-->
+                <?php
+                if (isset($_GET["p"]) && $_GET['p']>0 && $_GET['p']<$nbPages) {                           
+                ?>
+                <li class="page-item">
+                <a class="page-link" href="index.php?page=addFilms&amp;p=<?=$_GET["p"]+1?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+                </li>
+                <?php
+                }
+                else{
+                    ?>
+                        <li class="page-item">
+                <a class="page-link" href="index.php?page=addFilms&amp;p=<?=$_GET["p"]=$nbPages?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>;
+                <?php
+                }
+                ?>
+            </ul>            
+            </nav>
+        </div>
+    </div>    
 </section>
 
+
+<script src="../public/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
+<script  src="public/js/ajax.js"></script>
+<script src="public/js/addMovie.js"></script>
+<script src="public/js/searchMovie.js"></script>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>

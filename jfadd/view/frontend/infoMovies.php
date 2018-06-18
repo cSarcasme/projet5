@@ -2,7 +2,7 @@
 <?php $title = "Film info"?>
 
 <?php ob_start(); ?>   
-
+<?php include('body/topbar2.php');?>
 <section>
      
     <div class="container">
@@ -23,10 +23,10 @@
         </div>
         <div class="row justify-content-center">          
             <div class="col-3">      
-                <p class=""><img style="width:100%;" height="200" src="https://image.tmdb.org/t/p/original<?= $movie['image']?>"></p>
+                <p class=""><img style="width:100%;" height="300" src="<?= $movie['image']?>"></p>
             </div>
             <div class="col-7">
-                <iframe src="<?=$movie['bandeannonce']?>" style="width:100%;" height="200"></iframe>
+                <iframe src="<?=$movie['bandeannonce']?>" style="width:100%;" height="300"></iframe>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -37,7 +37,7 @@
                 <p><?= htmlspecialchars($movie['production'])?></p>
                 <h6 class="font-weight-bold">Acteur</h6>
                 <p><?= htmlspecialchars($movie['acteur'])?></p>
-                <p><span class="font-weight-bold">Date de sortie: </span><?=date('d/m/y',strtotime(htmlspecialchars($movie['datesortie'])))?></p>
+                <p><span class="font-weight-bold">Date de sortie: </span><?=htmlspecialchars($movie['datesortie'])?></p>
                 <p><span class="font-weight-bold">note: <span><?= htmlspecialchars($movie['note'])?><i class="fas fa-star text-warning"></i></span></p>
             </div>
         </div>
@@ -47,11 +47,11 @@
                     <!--icon update link movie -->
                     <a href="" class="ml-1" title="Mettre a jour liens du film vf" data-toggle="modal" data-target="#<?=$linkVf['id']?>"><i class="mb-1 mr-2 fas fa-link fa-lg p-2 bg-primary text-white"></i> </a>
                     <!--modal of icone update link movie-->
-                    <div class="modal fade" id="<?=$linkVf['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="<?=$linkVf['id']?>" tabindex="-" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Mettre a jour les liens du film</h5>
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Mettre a jour les liens vf du film</h5>
                                     <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -99,7 +99,74 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--icon add link vf movie -->
+                    <a href="" class="mr-1" title="ajouter liens du film vf" data-toggle="modal" data-target="#addLinkvf"><i class="fas fa-plus-square fa-lg text-white p-2 bg-success"></i></a>
+                    <!--modal of icone add link vf movie-->
+                    <div class="modal fade" id="addLinkvf" tabindex="-3" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Ajouter film</h5>
+                                    <button type="button"  class="close" data-dismiss="modal" aria-label="Close" id="closeLinkMovie">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--if click on add a link-->
+                                    <?php
+                                    if(isset($_POST['linkMovieVf'])){
+                                        $lang = htmlspecialchars($_POST['lang']);
+                                        $title =htmlspecialchars(trim($_POST['titleLink']));
+                                        $mango = htmlspecialchars(trim($_POST['mango']));
+                                        $open = htmlspecialchars(trim($_POST['open']));
+                                        $oza = htmlspecialchars(trim($_POST['oza']));
+                                        $rapi = htmlspecialchars(trim($_POST['rapid']));
+                                        $upto = htmlspecialchars(trim($_POST['upto']));
+                                        $nc = htmlspecialchars(trim($_POST['nc']));   
+                                                
+                                        add_LinkFilmInfo($title,$lang,$mango,$open,$oza,$rapi,$upto,$nc);                                           
+                                    }
+                                    var_dump($linkVf['language']);
+                                    ?>
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <select class="form-control language" name="lang">
+                                                <option value="VF">Vf</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Titre" class="form-control" name="titleLink"  value="<?=htmlspecialchars($movie['title'])?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Stream mango" class="form-control" name="mango" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Openload" class="form-control" name="open" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Videoza" class="form-control" name="oza" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="rapidVideo" class="form-control" name="rapid" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Uptobox" class="form-control" name="upto" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Nc" class="form-control" name="nc" >
+                                        </div>                                       
+                                        <div class="modal-footer">
+                                            <button type="submit" name="linkMovieVf"  class="btn btn-success">Ajouter</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                
                 <!--table vf link-->
                 <table class="table table-hover table-dark">
                     <thead>
@@ -154,7 +221,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Mettre a jour les liens du film</h5>
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Mettre a jour les liens vo du film</h5>
                                     <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -196,6 +263,71 @@
                                         </div>                                       
                                         <div class="modal-footer">
                                             <button type="submit" name="upLinkMovieVo"  class="btn btn-success">Mette a jour</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--icon add link vf movie -->
+                    <a href="" class="mr-1" title="ajouter liens du film vo" data-toggle="modal" data-target="#addLinkvo"><i class="fas fa-plus-square fa-lg text-white p-2 bg-success"></i></a>
+                    <!--modal of icone add link vf movie-->
+                    <div class="modal fade" id="addLinkvo" tabindex="-4" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-dark" id="exampleModalLabel">Ajouter film</h5>
+                                    <button type="button"  class="close" data-dismiss="modal" aria-label="Close" id="closeLinkMovie">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <!--if click on add a link-->
+                                    <?php
+                                    if(isset($_POST['linkMovieVo'])){
+                                        $lang = htmlspecialchars($_POST['lang']);
+                                        $title =htmlspecialchars(trim($_POST['titleLink']));
+                                        $mango = htmlspecialchars(trim($_POST['mango']));
+                                        $open = htmlspecialchars(trim($_POST['open']));
+                                        $oza = htmlspecialchars(trim($_POST['oza']));
+                                        $rapi = htmlspecialchars(trim($_POST['rapid']));
+                                        $upto = htmlspecialchars(trim($_POST['upto']));
+                                        $nc = htmlspecialchars(trim($_POST['nc']));   
+                                                
+                                        add_LinkFilmInfo($title,$lang,$mango,$open,$oza,$rapi,$upto,$nc);                                           
+                                    }
+
+                                    ?>
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <select class="form-control language" name="lang">
+                                                <option value="VO">Vo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Titre" class="form-control" name="titleLink"  value="<?=htmlspecialchars($movie['title'])?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Stream mango" class="form-control" name="mango" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Openload" class="form-control" name="open" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Videoza" class="form-control" name="oza" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="rapidVideo" class="form-control" name="rapid" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Uptobox" class="form-control" name="upto" >
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Nc" class="form-control" name="nc" >
+                                        </div>                                       
+                                        <div class="modal-footer">
+                                            <button type="submit" name="linkMovieVo"  class="btn btn-success">Ajouter</button>
                                         </div>
                                     </form>
                                 </div>
@@ -251,7 +383,7 @@
         </div>
     </div>
 </section>
-
+<script src="../public/js/jquery-3.2.1.min.js"></script>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>

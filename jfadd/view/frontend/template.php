@@ -9,10 +9,9 @@
 
     <!-- Bootstrap -->
     <link href="../public/css/bootstrap.css" rel="stylesheet">
-   <!-- <link href="../public/css/style.css" rel="stylesheet">-->
     <link href="public/css/style.css" rel="stylesheet">
 	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!--<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />-->
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/smoothness/jquery-ui.css" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,40 +21,21 @@
     <![endif]-->
   </head>
   <body>
-  <header>
-      
-      <?php
-      if(isset($_GET['page']) && $_GET['page']=='login'){
-        include('body/topbar.php');
-      }
-      else{
-        include('body/topbar2.php');
-      }
-      ?>
-      
-  </header>
+
   <main>
   <?= $content ?>
   </main>
 
-  <footer>
-      
-      <?php
-     // include('body/footer.php');
-      ?>
   
-  </footer>
     
 	  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="../public/js/jquery-3.2.1.min.js"></script>
-  <!--  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>-->
+    
     <!-- Bootstrap core JavaScript -->
     <script src="../public/js/bootstrap.js"></script>
     <script src="../public/js/bootstrap.bundle.js"></script>
-    <script  src="public/js/ajax.js"></script>
     <!--<script  src="public/js/searchMovie.js"></script>-->
-    <script  src="public/js/tinymce/tinymce.js">></script>
+    <script  src="public/js/tinymce/tinymce.js"></script>
     <script  src="public/js/script.js"></script>
     <script>
   tinymce.init({

@@ -7,30 +7,46 @@ try{
 		if($_GET['page'] != 'login' && !isset($_SESSION['email'])){
 			header('Location:index.php?page=login');
 		}
-/*page add media dashboard*/
-	/*page series*/
+/* ***page add media dashboard *** */
+
+	/* ** page series ** */
 		elseif ($_GET['page'] == 'addSeries') {
 			addSeries();
 		}
-	/*page movies*/
-		elseif ($_GET['page'] == 'addFilms') {
-			films();
+
+	/* **page movies ** */
+		elseif ($_GET['page'] == 'addFilms') {		
+			films();			
 		}
-		/*delete movie + links*/
+		/* delete movie + links */
 		elseif ($_GET['page'] == 'deleteFilm') {
 			if (isset($_GET['title'])) {
 				delete_Film($_GET['title']);
 			}
 		}
-	/*page animés*/
+
+	/* ** page animés ** */
 		elseif ($_GET['page'] == 'addAnimes') {
 			addAnimés();
 		}
-	/*page info movies*/
-		elseif ($_GET['page'] == 'movies') {
+
+
+/* *** all page info *** */
+
+	/* ** page info movies ** */
+		elseif ($_GET['page'] == 'moviesInfo') {
 			moviesInfo();
 		}
-	/* page center of dashboard with comment*/
+
+	/* ** page info series ** */
+		elseif ($_GET['page'] == 'seriesInfo') {
+			seriesInfo();
+		}
+
+
+/* *** page all dashboars *** */
+
+	/* ** page dashboard comment ** */
 		elseif ($_GET['page'] == 'dashboard') {
 			dashboard();
 		}
