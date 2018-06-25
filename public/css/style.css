@@ -3,15 +3,199 @@ a, a:link, a:hover {
     text-decoration: none!important;
     }
 
-/*page home*/
-    .table th,
-    .table td {
-        padding: 0.30rem;
-        font-size:14px;
-    }
+/* ** top bar ** */
 
-    #homeDateFilm img{
-        width:100%;
-        height:50%;
+    /* * connexion * */
+    #user{
+        border-right:2px solid #17A2B8;
     }
+    .modalConnexion{
+        position: fixed;
+        
+        top: 125px;
+        z-index: 10040;
+    }
+    @media (max-width: 575px) {
+        .modalConnexion {
+            left:0;
+            top:145px;
+        }
+    }
+    @media (min-width: 576px) {
+        .modalConnexion {
+            left: 202px;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        .modalConnexion {
+            left: 402px;
+        }
+      }
+      
+      @media (min-width: 992px) {
+        .modalConnexion {
+            left: 642px;
+        }
+      }
+      
+      @media (min-width: 1200px) {
+        .modalConnexion {
+            left: 822px;
+        }
+      }
+/* ** page home ** */
 
+    /* * slider * */
+        #slider{
+            position: relative;
+            width:100%;
+            height:490px;
+        }
+        #slider img{
+            width:100%;
+            height:490px;
+        }
+        #slide{
+            position:absolute;
+            top:0%;
+            width:10%;
+            z-index:50;
+            height:440px;                     
+        }
+        @media (max-width: 575px) {
+            #slider img,#slide {
+              display:none;
+            }
+            #slider{
+                height:0;
+            }
+          }
+        @media (min-width: 576px) {
+            #slide {
+              max-width: 540px;
+              width:505px;
+            }
+          }
+          
+          @media (min-width: 768px) {
+            #slide {
+              max-width: 720px;
+              width:695px;
+            }
+          }
+          
+          @media (min-width: 992px) {
+            #slide {
+              max-width: 960px;
+              width:935px;
+            }
+          }
+          
+          @media (min-width: 1200px) {
+            #slide {
+              max-width: 1140px;
+              width:1115px;
+            }
+          }
+        #harrow_right{
+            position:absolute;
+            right:5%;
+            top:48%;
+            bottom:48%;
+            cursor:pointer;
+            z-index: 5;
+            color:#00a4f2;
+        }
+        #harrow_left{
+            position:absolute;
+            left:5%;
+            top:48%;
+            bottom:48%;
+            cursor:pointer;
+            z-index: 5;
+            color:#00a4f2;
+        }
+        .slide{
+            width: 100%;
+            position:absolute;
+            left:0px;
+            top:0px;
+            overflow: hidden;
+            height:440px;  
+        }
+        .slide-bottom{
+            position: absolute;
+            bottom:0;
+            background:black;
+            width:100%;         
+            color:white;
+            opacity:0.94;      
+        }
+        .slide-bottom a{
+            background:none;
+            border:3px solid #E0A800;
+            color:white;
+        }        
+
+    /* * table * */
+        .table th,
+        .table td {
+            padding: 0.30rem;
+            font-size:14px;
+        }
+        .th1{
+            width:100%;
+        }
+        #homeDateFilm img{
+            width:100%;
+            height:100%;
+        }
+/* ** page films info ** * /
+
+    /* * slider * */
+
+    /* *effet de hover sur les images Series * */
+    .hovereffect {
+        width: 100%;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+    }   
+    .hovereffect .overlay{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        overflow: hidden;
+        left: 0%;
+        background-color:#17A2B8;
+        top: -200px;
+        opacity: 0;
+        filter: alpha(opacity=100);
+        -webkit-transition: all 0.4s ease-out 0.2s;
+        transition: all 0.4s ease-out 0.4s;
+        color:white;
+    }   
+    .hovereffect:hover .overlay {
+        opacity: 0.88;
+        filter: alpha(opacity=100);
+        top: 0px;
+        -webkit-transition-delay: 0s;
+        transition-delay: 0s;
+    }      
+    /* * films Note* */
+
+    .seeHome{
+        border-radius: 5px 5px 5px 5px;
+    }
+    
+/* ** page Inscription ** */
+
+.formIns{
+    border:4px solid #343A40;
+}
+
+  
+    

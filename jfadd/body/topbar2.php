@@ -1,24 +1,25 @@
 <header>
     <!--topbar for dashboard-->
-    <nav class="navbar navbar-expand-lg">
-    <div class="container">   
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <div class="container">
-                <div class="dropdown">
-                    <div class="row justify-content-start">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <span class=" align-text-top"><a class="nav-link text-primary size4"  data-toggle="tooltip" title="Deconnexion"    href="index.php?page=deconnexion"><i class="fas fa-sign-out-alt mr-1 "></i>Deconnexion</a></span>                              
-                            </li>
-                        </ul>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light">
+        <div class="container">   
+            <button class="navbar-toggler bg-white  " type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="float-left"><img src="../public/images/logo-StreamAddikt.png" alt="" width="200" height="50"></div>
+
+            <div class="collapse navbar-collapse " id="navbarNavDropdown">
+                <div class="container">
+                    <div class="dropdown">
+                        <div class="row justify-content-end">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <span class=" align-text-top"><a class="nav-link text-primary size4"  data-toggle="tooltip" title="Deconnexion"    href="index.php?page=deconnexion"><i class="fas fa-sign-out-alt mr-1 "></i>Deconnexion</a></span>                              
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="float-right"><img src="../public/images/logo-StreamAddikt.png" alt="" width="200" height="50"></div>
         </div>
     </nav>
     <div class="bg-dark p-1" id="titre2">

@@ -43,9 +43,9 @@ if(isset($_SESSION['email'])){
                                     }
                     
                                     else{
-                                        if($hash==sha1($password)){                                     
-                                            $_SESSION['email']=$result['email'] ;
-                                            $_SESSION['pseudo']=$result['pseudo'];
+                                        if($isPasswordCorrect){                                     
+                                            $_SESSION['admin']['email']=$result['email'] ;
+                                            $_SESSION['admin']['pseudo']=$result['pseudo'];
                                             header('Location:index.php?page=dashboard');
                                         }
                                         else{

@@ -13,6 +13,8 @@
     <!-- Bootstrap -->
     <link href="public/css/bootstrap.css" rel="stylesheet">
     <link href="public/css/style.css" rel="stylesheet">
+    <link href="public/css/owl.carousel.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	
 
@@ -43,9 +45,13 @@
     
 	  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="public/js/jquery-3.2.1.min.js"></script>
+    <script src="public/js/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- Bootstrap core JavaScript -->
     <script src="public/js/bootstrap.js"></script>
-    <script type="text/javascript" src="public/js/script.js"></script>
+    <script src="public/js/script.js"></script>
+    <script src="public/js/slider.js"></script>
+    <script src="public/js/owl.carousel.js"></script>
+    <script src="public/js/searchMovie.js"></script>
   </body>
 </html>

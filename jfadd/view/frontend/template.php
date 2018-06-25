@@ -22,9 +22,9 @@
   </head>
   <body>
 
-  <main>
+  
   <?= $content ?>
-  </main>
+  
 
   
     

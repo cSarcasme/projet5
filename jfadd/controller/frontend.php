@@ -24,82 +24,12 @@ require_once('model/infoManager.php');
     }
 /* *** all media dashboard *** */
 
-    /* ** page series ** */
-        function addSeries(){
-
-            $mediaManager = new ced\Blog\projet4\mediaManager;
-            /*count nbr films in bbd*/
-            $countFilms = $mediaManager->countFilms();
-            /*count nbr series in bbd*/
-            $countSeries = $mediaManager->countSeries();
-            /*pagination*/
-            $nbPages = $mediaManager->nbPagesSeries();
-            if(isset($_GET['p']) && $_GET['p']>0 && $_GET['p']<=$nbPages ){
-                $cPage=$_GET['p'];
-            }
-            else{
-                $cPage=1;
-            }
-            
-            /*get Series in bbd */
-            if(isset($_POST['search']) && !empty($_POST['search']) && $_POST['search'] ){
-                $postSeries = $mediaManager -> getSeriesSearch($_POST['search'],$cPage);
-            }
-            else{
-                $postSeries = $mediaManager -> getSeries($cPage);
-            }
-            
-        
-            require('view/frontend/addSeries.php');
-        }
-
-        /*add series info to bbd*/
-        function add_Series($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops){
-            $mediaManager = new ced\Blog\projet4\mediaManager;
-            $affectedLines = $mediaManager -> addSeries($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops); 
-                
-            if ($affectedLines === false) {
-                throw new Exception('Impossible d \' ajouter les informations de la serie !');
-            }
-            else {
-            header('Location:index.php?page=addSeries&p=1');
-            }
-        }
-
-        /*update Serie into bbd*/
-        function update_Serie($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops,$serieId){
-            $mediaManager = new ced\Blog\projet4\mediaManager;
-            $affectedLines = $mediaManager -> updateSerie($title,$kind,$exit,$image,$note,$ba,$prod,$acteurs,$synops,$serieId);
-        
-            if ($affectedLines === false) {
-                throw new Exception('Impossible de modifier les informations de la serie !');
-            }
-            else {
-            header('Location:index.php?page=addSeries&p=1');
-            }
-        }
-
-        /*add link serie into bbd*/
-        function add_LinkSerie($season,$episode,$title,$lang,$mango,$open,$oza,$rapi,$upto,$nc){
-            $mediaManager = new ced\Blog\projet4\mediaManager;
-            $affectedLines = $mediaManager -> addLinkSerie($season,$episode,$title,$lang,$mango,$open,$oza,$rapi,$upto,$nc);
-        
-            if ($affectedLines === false) {
-                throw new Exception('Impossible d \' ajouter les liens de la serie !');
-            }
-            else {
-            header('Location:index.php?page=addSeries&p=1');
-            }
-        }
-
     /* ** page movies ** */
         function films(){
             
             $mediaManager = new ced\Blog\projet4\mediaManager;
             /*count nbr films in bbd*/
             $countFilms = $mediaManager->countFilms();
-            /*count nbr seies in bbd*/
-            $countSeries = $mediaManager->countSeries();
             /*pagination*/
             $nbPages = $mediaManager->nbPagesFilms();
             if(isset($_GET['p']) && $_GET['p']>0 && $_GET['p']<=$nbPages ){
@@ -114,9 +44,25 @@ require_once('model/infoManager.php');
             }
             else{
                 $postFilms = $mediaManager -> getFilms($cPage);
+                
             }
-                                      
+            
+
+            
+
             require('view/frontend/addFilms.php');
+        }
+
+        function jasonFilms($term){
+            $mediaManager = new ced\Blog\projet4\mediaManager;
+            $postFilms = $mediaManager -> getFilmsAuto($term);
+            $array =[];
+            while($donnee = $postFilms->fetch()){ // on effectue une boucle pour obtenir les données
+                
+            array_push($array, $donnee['title']); // et on ajoute celles-ci à notre tableau
+            }
+
+            echo json_encode($array);
         }
 
         /*add movie info to bbd*/
@@ -170,15 +116,6 @@ require_once('model/infoManager.php');
             header('Location:index.php?page=addFilms');
             }           
         }
-
-    /* ** page animé ** */
-        function addAnimés(){
-            $mediaManager = new ced\Blog\projet4\mediaManager; 
-                        
-            require('view/frontend/addAnimes.php');
-        }
-
-
 /* *** all page info *** */
 
     /* ** page movies info ** */
@@ -232,63 +169,6 @@ require_once('model/infoManager.php');
             $linkVo = $infoManager -> getLinksFilmVo($_GET['title']);
             
             require('view/frontend/infoMovies.php');
-        }
-
-    /* ** page series info ** */
-        function seriesInfo(){
-            /* add link movie into bbd */
-            function add_LinkSerieInfo($title,$lang,$mango,$open,$oza,$rapi,$upto,$nc){
-                $infoManager = new ced\Blog\projet4\infoManager;
-                $affectedLines = $infoManager -> addLinkSerie($title,$lang,$mango,$open,$oza,$rapi,$upto,$nc);
-            
-                if ($affectedLines === false) {
-                    throw new Exception('Impossible d \' ajouter les liens du film !');
-                }
-                else {
-                header("Location:index.php?page=seriesInfo&title=$title");
-                }
-            }
-
-            /* update link movie vf in bbd */
-            function update_LinksSerieVf($title,$mango,$open,$oza,$rapi,$upto,$nc){
-                $infoManager = new ced\Blog\projet4\infoManager;
-                $affectedLines =  $infoManager -> updateLinksSerieVf($title,$mango,$open,$oza,$rapi,$upto,$nc);
-
-                if ($affectedLines === false) {
-                    throw new Exception('Impossible de mettre a jour les liens du film vf !');
-                }
-                else {
-                header("Location:index.php?page=seriesInfo&title=$title");
-                }
-            }
-
-            /* update link movie vo in bbd */
-            function update_LinksSerieVo($title,$mango,$open,$oza,$rapi,$upto,$nc){
-                $infoManager = new ced\Blog\projet4\infoManager;
-                $affectedLines =  $infoManager -> updateLinksSerieVo($title,$mango,$open,$oza,$rapi,$upto,$nc);
-
-                if ($affectedLines === false) {
-                    throw new Exception('Impossible de mettre a jour les liens du film vo !');
-                }
-                else {
-                header("Location:index.php?page=seriesInfo&title=$title");
-                }
-            }
-
-            $infoManager = new ced\Blog\projet4\infoManager;
-            /*get movie info from bbd */
-            $serie = $infoManager -> getSerie($_GET['title']);
-            /*get movie link vf from bbd */
-            if(isset($_POST['season']) && !empty($_POST['episode'])){
-                $linkVf = $infoManager -> getLinksSerieVf($_GET['title'],$_POST['season'],$_POST['episode']);
-            }
-            else{
-                $linkVf = $infoManager -> getLinksSerieVfOpen($_GET['title']);
-            }
-            /*get movie link vo from bbd */
-            $linkVo = $infoManager -> getLinksSerieVo($_GET['title']);
-        
-            require('view/frontend/infoSeries.php');
         }
 /* page center of dashboard with comment*/
     function dashboard(){

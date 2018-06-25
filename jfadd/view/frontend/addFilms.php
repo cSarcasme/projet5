@@ -177,7 +177,7 @@
             <div class="mr-2 float-right">
                 <form method="post" action="index.php?page=addFilms" id="searchMovieBa">                
                     <div class="input-group px-5" style="">
-                        <input type="search" name="search" id="search" class="form-control" >
+                        <input type="search" name="search" id="search" class="form-control">
                         
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-warning">
@@ -202,12 +202,13 @@
             <?php 
             
                 foreach($postFilms as $postFilm){
+                   
                     
                 ?>
             <tbody>
                 <tr>
                     <th scope="row"><?= $postFilm['id']?></th>
-                    <td><?= htmlspecialchars($postFilm['title'])?></td>
+                    <td><?= substr(htmlspecialchars($postFilm['title']),0,30)?></td>
                     <td><?= substr(htmlspecialchars($postFilm['synopsis']),0,100)?>...</td>
                     <td><?= htmlspecialchars($postFilm['kind'])?></td>
                     <td><?= htmlspecialchars($postFilm['datesortie'])?></td>

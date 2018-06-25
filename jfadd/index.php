@@ -9,14 +9,12 @@ try{
 		}
 /* ***page add media dashboard *** */
 
-	/* ** page series ** */
-		elseif ($_GET['page'] == 'addSeries') {
-			addSeries();
-		}
-
 	/* **page movies ** */
 		elseif ($_GET['page'] == 'addFilms') {		
 			films();			
+		}
+		elseif ($_GET['page'] == 'jasonFilms'){
+			jasonFilms($_GET['term']);
 		}
 		/* delete movie + links */
 		elseif ($_GET['page'] == 'deleteFilm') {
@@ -25,24 +23,12 @@ try{
 			}
 		}
 
-	/* ** page animés ** */
-		elseif ($_GET['page'] == 'addAnimes') {
-			addAnimés();
-		}
-
-
 /* *** all page info *** */
 
 	/* ** page info movies ** */
 		elseif ($_GET['page'] == 'moviesInfo') {
 			moviesInfo();
 		}
-
-	/* ** page info series ** */
-		elseif ($_GET['page'] == 'seriesInfo') {
-			seriesInfo();
-		}
-
 
 /* *** page all dashboars *** */
 
