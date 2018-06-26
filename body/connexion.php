@@ -25,9 +25,10 @@
     
                     else{
                         if($isPasswordCorrect){                                     
-                            $_SESSION['user']['email']=$result['email'] ;
-                            $_SESSION['user']['pseudo']=$result['pseudo'];
-                            $_SESSION['user']['image']=$result['image'];
+                            $_SESSION['user']['email'] = $result['email'] ;
+                            $_SESSION['user']['pseudo'] = $result['pseudo'];
+                            $_SESSION['user']['image'] = $result['image'];
+                            $_SESSION['user']['name'] = $result['name'];
                             header('Location:index.php?page=home');
                         }
                         else{

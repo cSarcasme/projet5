@@ -6,8 +6,8 @@ a, a:link, a:hover {
 /* ** top bar ** */
 
     /* * connexion * */
-    #user{
-        border-right:2px solid #17A2B8;
+    .user{
+        border-right:2px solid white;
     }
     .modalConnexion{
         position: fixed;
@@ -162,7 +162,7 @@ a, a:link, a:hover {
         overflow: hidden;
         position: relative;
         text-align: center;
-        cursor: pointer;
+        
     }   
     .hovereffect .overlay{
         width: 100%;
@@ -184,7 +184,13 @@ a, a:link, a:hover {
         top: 0px;
         -webkit-transition-delay: 0s;
         transition-delay: 0s;
-    }      
+    }
+    .ovelaybottom{
+        position:absolute;
+        bottom:5px;
+        left:0%;
+        right:0%;
+    }     
     /* * films Note* */
 
     .seeHome{

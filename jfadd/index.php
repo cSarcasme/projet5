@@ -4,7 +4,7 @@ session_start();
 try{
 	$pages = scandir('view/frontend/');
 	if (isset($_GET['page'])) {
-		if($_GET['page'] != 'login' && !isset($_SESSION['email'])){
+		if($_GET['page'] != 'login' && !isset($_SESSION['admin']['email'])){
 			header('Location:index.php?page=login');
 		}
 /* ***page add media dashboard *** */

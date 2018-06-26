@@ -7,6 +7,8 @@ require_once('model/commentManager.php');
 require_once('model/infoManager.php');
 require_once('model/InscriptionManager.php');
 require_once('model/loginUserManager.php');
+require_once('model/moviesManager.php');
+require_once('model/configurationManager.php');
 
 /* ** page home ** */
 
@@ -25,29 +27,37 @@ require_once('model/loginUserManager.php');
             $mediaManager = new ced\stream\model\HomeManager;
                 $postFilms = $mediaManager -> getFilmsAuto($term);
                 $array =[];
-                while($donnee = $postFilms->fetch()){ // on effectue une boucle pour obtenir les données
+                while($donnee = $postFilms->fetch()){ 
                     
-                array_push($array, $donnee['title']); // et on ajoute celles-ci à notre tableau
+                array_push($array, $donnee['title']); 
                 }
 
                 echo json_encode($array);
         }
     }
-    /* * connexion users * */
+
+/* ** login users ** */
+
     class LoginUserConnexion{
+        /*verif email or pseudo exist in bbd*/
         public function is_User($email,$pseudo){
             $loginUserManager = new ced\stream\model\loginUserManager;
             $result = $loginUserManager -> isUser($email,$pseudo);
+            
             return $result;
         }
     }
+
     /* * deconnexion users * */
     class UserDeconnexion{
         public function deconnexion(){
-            session_destroy();
+            unset($_SESSION['user']['email']) ;
+            unset($_SESSION['user']['pseudo']);
+            unset($_SESSION['user']['image']);
             header('Location:index.php?page=home');
         }
     }
+
 /* ** page inscription ** */
 
     class PageInscription{
@@ -66,11 +76,13 @@ require_once('model/loginUserManager.php');
             
         }
     }
+    /* * verif the name or emaild don' t exist in bbd * */
     class VerifUsersIfExist{
         /*verif user email if exist in bbd*/
         public function If_Exist($pseudo,$email){
             $InscriptionManager = new ced\stream\model\InscriptionManager;
             $result = $InscriptionManager -> IfExist($pseudo,$email);
+            
             return $result;
         }
     }
@@ -86,19 +98,31 @@ require_once('model/loginUserManager.php');
         require('view/frontend/post.php');          
     }
 
+/* ** page movies ** */
 
-class PageMovies{
-        public function movies(){
-            $infoManager = new ced\stream\model\infoManager;
-            /*get movie info from bbd */
-            $film = $infoManager ;
-            $films = $infoManager ;
-            require('view/frontend/movies.php');          
+    class PageMovies{
+            public function movies(){
+                $movies = new ced\stream\model\Movies;
+                /* nbr page */
+                $nbPages = $movies -> nbPagesBoardPosts();
+                /*rules*/
+                if(isset($_GET['p']) && $_GET['p']>0 && $_GET['p']<=$nbPages ){
+                    $cPage=$_GET['p'];
+                }
+                else{
+                    $cPage=1;
+                }
+
+                /*get all movie from bbd */
+                $films = $movies -> getFilms($cPage);
+
+                require('view/frontend/movies.php');          
+            }
         }
-    }
 
 
 /* ** page movies info ** */
+
     class PageMoviesInfo{
         /*page films*/
         public function infoMovies(){
@@ -108,7 +132,7 @@ class PageMovies{
             $films = $infoManager -> getFilms();
         
             $commentManager=new ced\stream\model\commentManager();
-            /*get comments of page film info */
+            /*get comments for page film info */
             $comments = $commentManager->getCommentsFilm($_GET['id']);
 
             if ($film == false) {
@@ -119,17 +143,18 @@ class PageMovies{
             }          
         }
 
-        /*post comment film*/
+        /*post comment on page movies*/
         public function post_CommentFilm($filmId,$name, $email, $comment,$image){
             $commentManager=new ced\stream\model\CommentManager();
             $affectedLines = $commentManager->postCommentFilm($filmId,$name, $email, $comment,$image);
             
+            /*if error*/
             if ($affectedLines == false) {
                 throw new Exception('impossible de poster le commentaire');
             }
         }
 
-        /*update signal abuse comment*/
+        /*comment abuse signal*/
         public function update_CommentSeen($film_Id,$filmId){
             $commentManager=new ced\stream\model\commentManager();
             $affectedLines = $commentManager -> updateComment($filmId);
@@ -141,5 +166,25 @@ class PageMovies{
             header('Location:index.php?page=infoMovies&id='.$film_Id);
             }
         }
+    }
 
+/* ** page configuration users ** */
+
+    class PageConfig{
+        public function config(){
+            
+            require('view/frontend/configuration.php'); 
+        }
+        public function update_User($name,$pseudo,$image,$email){
+            $configurationManager = new ced\stream\model\ConfigurationManager;
+            $update = $configurationManager -> updateUser($name,$pseudo,$image,$email);
+        }
+        /* verif passord by email */
+        public function is_Email($email){
+            $configurationManager = new ced\stream\model\ConfigurationManager;
+            $result = $configurationManager -> isEmail($email);
+            
+            return $result;
+        }
+    
     }

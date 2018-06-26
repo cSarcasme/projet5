@@ -10,7 +10,7 @@ class infoManager extends Manager{
     /* select movies */
     public function getFilm($filmId){
         $db=$this->dbConnect();
-        $req = $db->prepare("SELECT films.title, films.kind, films.datesortie,films.image, films.note,
+        $req = $db->prepare("SELECT films.id,films.title, films.kind, films.datesortie,films.image, films.note,
          films.bandeannonce, films.production, films.acteur, films.synopsis FROM films  WHERE films.id = ? ");
          $req->execute(array($filmId));
 

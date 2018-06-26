@@ -11,14 +11,20 @@ try{
 			$home = new PageHome;
 			$home -> home(); 
 		}
+		/*data json for search */
 		elseif ($_GET['page'] == 'jasonFilms'){
 			$home = new PageHome;
 			$home-> jasonFilms($_GET['term']);
 		}
 		/* inscription user */
 		elseif ($_GET['page'] == 'inscription') {
-			$insciption = new PageInscription;
-			$insciption -> inscription();
+			$inscription = new PageInscription;
+			$inscription -> inscription();
+		}
+		/* inscription user */
+		elseif ($_GET['page'] == 'config') {
+			$config = new PageConfig;
+			$config -> config();
 		}
 		/* deconnexion user */
 		elseif ($_GET['page'] == 'deconnexion') {

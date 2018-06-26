@@ -51,7 +51,7 @@ class CommentManager extends Manager{
     public function getCommentsFilm($filmId){
         $db = $this->dbConnect();
         $comments=$db->prepare("SELECT comments_film.id, comments_film.name, comments_film.email, comments_film.comment ,comments_film.seen,
-        comments_film.image FROM comments_film WHERE comments_film.film_id=? ORDER BY comments_film.date DESC LIMIT 0,10");  
+        comments_film.image,comments_film.date FROM comments_film WHERE comments_film.film_id=? ORDER BY comments_film.date DESC LIMIT 0,15");  
         
         $comments->execute(array($filmId));
 

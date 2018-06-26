@@ -1,27 +1,27 @@
-<!--page movies-->   
-<?php $title = "movies"?>
+<!--page movies info-->   
+<?php $title = "movies-info"?>
 
 <?php ob_start(); ?>
 <section id="slideFilm" class="mt-3">
     <div class="container">
         <?php include('body/connexion.php')?>
-        <div class="d-flex flex-row bd-highlight owl-carousel" id="slideShow">
+        <div class="owl-carousel" id="slideShow">
         <?php
             foreach ($films as $listFilm){
         ?>
-        
             <div class="card  hovereffect "  id="slideFilm">
                 <img class="card-img-top" src="<?= $listFilm['image']?>" height="250" alt="Card image cap">
                 <div class="card-body  overlay">
                     <h5 class="font-weight-bold text-dark"><?= $listFilm['title']?></h5>
                     <p class="crSeSy"><?=htmlspecialchars(substr($listFilm['synopsis'],0,130))?> ...</p>
-                                
+                    <div class="ovelaybottom">
+                        <a href="index.php?page=infoMovies&amp;id=<?= $listFilm['id'] ?>" class="px-4 py-1 bg-white text-info font-weight-bold">Regarger</a>
+                    </div>               
                 </div>
                 <div class=" p-2 bg-dark text-white">
                     <div class="d-flex justify-content-center"><span class="font-weight-bold"><?= $listFilm['note'] ?></span><i class="fas fa-star text-warning p-1"></i></div>             
                 </div>
             </div>  
-      
         <?php
             }
         ?>
@@ -64,35 +64,35 @@
         <div class="row">
             <div class="col-12">
             <?php
-            if(!isset($_SESSION['email'])){
+            if(!isset($_SESSION['user']['email'])){
                 ?>
                     <p class="ml-1"><em>Il faut être inscrit pour laisser des commentaires (<a href="index.php?page=inscription">inscription</a>)</em></p>
                 <?php
             }
             ?>
-            <h2 class="text-muted">Commentaires</h2>
-                <?php
-                if(isset($comments)){
-                    ?>
-                        <p class="ml-1"><em>Soit le premier a commenter</em></p>
-                    <?php
-                }      
+            <h2 class="text-muted" id="commentFilm">Commentaires</h2>
+                <?php 
                     foreach($comments as $comment){
-                          
-                    ?>
+                        
+                ?>
                             
                     <div class="media border p-3 mb-3 mt-3">
-                        <img src="public/images/users/<?= $_SESSION['user']['image'] ?>"alt="image comment user" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                        <img src="public/images/users/<?=htmlspecialchars($comment['image'])?>"alt="image comment user" class="mr-3 mt-3 rounded-circle" style="width:60px;">
                         <div class="media-body">
-                            <h4><?=htmlspecialchars($comment['name'])?> <span class="text-muted" id="chapterDateComment"><em> Le <?= date("d/m/Y à H:i",strtotime(htmlspecialchars($post['date']))); ?></em></span></h4>
+                            <h5 class="font-weight-bold"id="titleCommentFilm"><?=htmlspecialchars($comment['name'])?> <span class="text-muted font-weight-normal" style="font-size:12px;" ><em> Le <?= date("d/m/Y à H:i",strtotime(htmlspecialchars($comment['date']))); ?></em></span></h5>
                             <p><?= htmlspecialchars($comment['comment'])?></p>      
-                            <a href="index.php?page=click&amp;id=<?=$post['id']?>&amp;idc=<?=$comment['id']?>" class="text-danger" style="float:right;"><i class="fas fa-flag mr-1"></i>Signaler un abus</a>
+                            <a href="index.php?page=click&amp;id=<?=$film['id']?>&amp;idc=<?=$comment['id']?>" class="text-danger" style="float:right;"><i class="fas fa-flag mr-1"></i>Signaler un abus</a>
                         </div>
                     </div>
                     <?php
                         }                 
                     ?>
                     <script>
+                        function redirect(){
+                        setTimeout(function(){
+                            window.location = 'index.php?page=infoMovies&id=<?= $_GET['id']?>'; 
+                             }, 3000);
+                    }
                     </script>
                 <!-- submit comment from form -->
                 <?php
@@ -128,6 +128,9 @@
                         <div class="alert alert-success">
                             Commentaire envoyé 
                         </div>
+                        <script>
+                            redirect();
+                        </script>
                         <?php
                     }
                 }

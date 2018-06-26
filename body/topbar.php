@@ -29,20 +29,17 @@
             <div class="collapse navbar-collapse justify-content-start" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link text-white font-weight-bold" href="index.php?page=home">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link text-white font-weight-bold" href="index.php?page=home">ACCUEIL <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php?page=movies">Films</a>
+                        <a class="nav-link text-white" href="index.php?page=movies">FILMS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php?page=series">Series</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="index.php?page=blog">Blog</a>
+                        <a class="nav-link text-white" href="index.php?page=blog">BLOG</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        ARTICLE
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Action</a>
@@ -57,7 +54,8 @@
                     if(isset($_SESSION['user']['email'])){
                         ?>
                         
-                        <div class="text-white mr-2 py-2" id="user">Bienvenue <em class="text-danger mr-1"><?= $_SESSION['user']['pseudo']?></em></div>
+                        <div class="text-white mr-2 py-2 user">Bienvenue <em class="text-muted mr-1 "><?= $_SESSION['user']['pseudo']?></em></div>
+                        <a href="index.php?page=config" class="py-2 mr-2" title="config"><i class="fas fa-cog fa-lg text-danger"></i></a>
                         <a href="index.php?page=deconnexion" class="py-2" title="Deconnexion"><i class="fas fa-sign-out-alt fa-lg text-info"></i></a>
                         <?php
                 }

@@ -13,5 +13,9 @@ $( document ).ready(function() {
         autoplayHoverPause:true
     });
    $(".owl-carousel").owlCarousel();
+
+   if($('#titleCommentFilm').length<1){
+       $('<p class="ml-1" ><em>Soit le premier à commenter</em><p/>').insertAfter('#commentFilm');
+   }
    
 });
