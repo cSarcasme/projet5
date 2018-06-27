@@ -1,4 +1,4 @@
-
+/* mini reset */
 .size{
     font-size:12px;
 }
@@ -18,8 +18,29 @@
 .size4{
     font-size:20px;
 }
+@media (min-width: 1200px) {
+    .container-fluid{
+        max-width: 1500px;
+    }
+}
+
+/* **page publication ** */
+.tb1{
+    width:15%;
+}
+.tb2{
+    width:55%;
+}
+.tb3{
+    width:15%;
+}
+.tb4{
+    width:15%;
+}
 /* css topbar2*/
-   
+ #titre2 a{
+     border:2px solid #343A40;
+ }
 /* css writte article*/
     /*input file*/
     .btn-file {
@@ -42,14 +63,8 @@
         display: block;
     }
 
-    #img-upload{
-        width: 100%;
-    }
-
-    .form2{
-        border-top:white;
-        border-left:white;
-        border-right:white;
+    .formIns{
+        border:3px solid #343A40;
     }
     /* chexkbox */
 
@@ -97,27 +112,22 @@
     }  
 
 /* css config */
-    .form{
-        width:100%;
-        border-top:1px solid white;
-        border-right:1px solid white;
-        border-left:1px solid white;
-        border-bottom:1px solid black;
-    }
-    .form:focus{
-        border-bottom:3px solid #17A2B8;
-        background:#e5fbff;
-    }
+    
 /*css tableau des medias*/
     /*part films*/
 
     .table th{
         padding:0.30rem;
         font-size:16px;
+        border-color: #32383e;
     }
     .table td{
         font-size:14px;
         padding:0.30rem;
+        border-color: #32383e;
+    }
+    table tr{
+        border: #32383e;
     }
     .th1{
         width:5%;
@@ -126,26 +136,19 @@
         width:10%;    
     }
     .th3{
-        width:45%;  
+        width:50%;  
     }
     .th4{
         width:15%;
     }
     .th5{
-        width:10%;
+        width:7%;
     }
     .th6{
-        width:15%;
-    }
-    .imdb{
-        width:50%;
+        width:18%;
     }
 
-    .language{
-        width:25%;
-    }
-
-/*css info movie*/
+/* ** css info movie ** */
 
     .thInf1{
         width:20%;
@@ -157,3 +160,40 @@
         width:60%;  
     }
 
+/* ** page post view backend ** */
+.color{
+    background:#F2F2F2;
+    height:100%;
+}
+
+section{
+    background:white;
+}
+#postTitle{
+    position:absolute;
+    top:38%;
+    left:0%;
+    right:0%;
+    opacity:0.85
+}
+#postName{
+    position:absolute;
+    top:52%;
+    left:7%;
+    right:7%;
+    
+}
+#postTitle h1{
+    background:black;
+}
+#postImageChapter{
+    position:relative;   
+}
+.postContentImage{
+    height:380px;
+    width:100%;
+    
+}
+#text-post{
+    color:grey; 
+}

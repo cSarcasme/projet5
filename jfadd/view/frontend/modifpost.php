@@ -2,20 +2,17 @@
 <?php $title = "Article";
  ob_start();
 ?>
-<session>
-    <div class="container">
-    <h1 class="text-center mt-4 mb-4">POSTER UN ARTICLE</h1>
-        <!--form modification article-->
-        <form method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="form-group col-12">
-                    <input type="name" name ="titre" placeholder="titre de l' article" value="<?= $post['title']?>" class="form mb-5">
-                </div>
-                <div class="form-group col-12">
-                    <textarea name="contenu" placeholder="Contenu de l' article"  class="form mb-5"><?= $post['content']?></textarea>
-                <div>
 
-                <?php
+<?php include('body/topbar2.php');?>     
+
+
+<div class="color">
+    <div class="container-fluid">
+        <section>
+            <div class="container">
+            <h1 class="text-center mb-4">MOFIFIER UN ARTICLE</h1>
+
+            <?php
                 /* isset type submit form condition */
                     if(isset($_POST['postArticle'])){
                         $title=trim($_POST['titre']);
@@ -48,34 +45,44 @@
                             <?php
                         }
                         else{
-                            modif_Post($_GET['id'], $title, $content, $posted);
+                            $update = new ModifPost;
+                            $update -> modif_Post($_GET['id'], $title, $content, $posted);
                         }
                     }
                 ?>
-
-                <div class="row mt-3">     
-                    <div class="col-12 col-md-4 mt-3">
-                        <div class="col-12">
-                            <p><strong>Public</strong></p> 
+                <!--form modification article-->
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="form-group col-12 mb-4">
+                            <input type="name" name ="titre" placeholder="titre de l' article" value="<?= $post['title']?>" class="form-control formIns py-2">
                         </div>
-                        <div class="col-12">
-                            <div class="material-switch pull-right">
-                                <span class="mr-3"> Non</span>
-                                <input id="someSwitchOptionDefault" name="checkbox" type="checkbox" value="on"/>
-                                <label for="someSwitchOptionDefault" class="label-default bg-info"></label>
-                                <span class="ml-5"> Oui</span>
-                            </div>       
-                        </div>   
+                        <div class="form-group col-12">
+                            <textarea id="writte" name="contenu" placeholder="Contenu de l' article"  class="form mb-5" style="height:700px;"><?= $post['content']?></textarea>
+                        <div>
+                        <div class="row mt-3">     
+                            <div class="col-12 col-md-4 mt-3">
+                                <div class="col-12">
+                                    <p><strong>Public</strong></p> 
+                                </div>
+                                <div class="col-12">
+                                    <div class="material-switch pull-right">
+                                        <span class="mr-3"> Non</span>
+                                        <input id="someSwitchOptionDefault" name="checkbox" type="checkbox" value="on"/>
+                                        <label for="someSwitchOptionDefault" class="label-default bg-dark"></label>
+                                        <span class="ml-5"> Oui</span>
+                                    </div>       
+                                </div>   
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" name="postArticle" class=" font-weight-bold btn btn-success pl-5 pr-5 ">Modifier l'article</button>
+                            </div>
+                        </div>     
                     </div>
-                    <div class="col-12 col-md-1 mt-5">
-                        <button type="submit" name="postArticle" class="btn btn-info pl-5 pr-5 ">Modifier l'article</button>
-                    </div>
-                </div>     
+                </form>
             </div>
-        </form>
+        </session>
     </div>
-</session>
-
+</div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>

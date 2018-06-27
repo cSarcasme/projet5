@@ -5,20 +5,22 @@ if(isset($_SESSION['email'])){
 }
  ob_start()
 ?>
-<?php include('body/topbar.php'); ?>
-<session>
-    <div class="container">
 
-        <div class="row justify-content-center">
-            <div class="col-auto mt-5 mb-5">
-                <div class="card border border-dark" style="width: 20rem;">
-                    <div class="row ">
-                        <div class="col-6 offset-3">
-                            <img class="card-img-top" src="../public/images/admin.png" alt="Card image cap">
+<?php include('body/topbar.php'); ?>
+
+<div class="color">
+    <div class="container-fluid">        
+        <section>
+            <div class="row justify-content-center">
+                <div class="col-auto mt-5 mb-5">
+                    <div class="card border border-dark bg-info" style="width: 20rem;">
+                        <div class="row ">
+                            <div class="col-6 offset-3">
+                                <img class="card-img-top" src="../public/images/admin.png" alt="Card image cap">
+                            </div>
                         </div>
-                    </div>
                         <div class="card-body ">
-                            <h4 class="card-title text-center">Se connecter</h4>
+                            <h4 class="card-title text-white font-weight-bold text-center">Se connecter</h4>
 
                             <?php
                             /*isset type submit with condition for login*/
@@ -46,7 +48,7 @@ if(isset($_SESSION['email'])){
                                         if($isPasswordCorrect){                                     
                                             $_SESSION['admin']['email']=$result['email'] ;
                                             $_SESSION['admin']['pseudo']=$result['pseudo'];
-                                            header('Location:index.php?page=dashboard');
+                                            header('Location:index.php?page=dashboard&p=1');
                                         }
                                         else{
                                             
@@ -72,22 +74,22 @@ if(isset($_SESSION['email'])){
                             <!--form of login-->
                             <form method="post">
                                 <div class="row">
-                                    <div class="col-12 mt-3">
-                                        <laber for="email">Email ou pseudo</label>
-                                        <input type="text" name="email" id="email" class="form">                              
+                                    <div class="form-group mt-1 col-12">
+                                        <label for="email">Email ou pseudo</label>
+                                        <input type="text" name="email" id="email" class="form-control formIns py-2 w-100">                              
                                     </div>
                                 
-                                    <div class="col-12 mt-3">
-                                        <laber for="password">Mot de passe</label>
-                                        <input type="password" name="password" id="password" class="form">                              
+                                    <div class="form-group mt-1 col-12">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" name="password" id="password" class="form-control formIns py-2">                              
                                     </div>
 
-                                    <div class="checkbox ml-3 mt-3">
+                                    <div class="form-group ml-3 col-12 mt-3">
                                         <label><input type="checkbox" value=""> Connexion automatique</label>
                                     </div>
 
-                                    <div class="col-12 text-center mt-4" id="buttonLogin" >
-                                        <button  type="submit" name="submit" id="submit" class="btn btn-info ">SE CONNECTER</button>
+                                    <div class="col-12 text-center mt-1" id="buttonLogin" >
+                                        <button  type="submit" name="submit" id="submit" class="btn btn-success ">SE CONNECTER</button>
                                     </div>
                                 </div>
                             </form>
@@ -95,9 +97,10 @@ if(isset($_SESSION['email'])){
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-</session>
+</div>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>

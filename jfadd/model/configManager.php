@@ -1,10 +1,10 @@
 <?php
 /*page configuration manager*/
-namespace ced\Blog\projet4;
+namespace ced\stream\model;
 
 require_once("model/manager.php");
 
-class configManager extends Manager{
+class ConfigManager extends Manager{
     /*select admins dor dashboard admins*/
     public function selectAdmins($pseudo,$email){
         $db=$this->dbConnect();

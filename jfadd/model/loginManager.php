@@ -1,10 +1,10 @@
 <?php
 /*page login manager*/
-namespace ced\Blog\projet4;
+namespace ced\stream\model;
 
 require_once("model/manager.php");
 
-class loginManager extends Manager{
+class LoginManager extends Manager{
     /*verification is  login exist*/
     public function is_Admin($email,$pseudo){
         $db = $this->dbConnect();

@@ -1,8 +1,8 @@
 <!--model for adddashboard-->
-<h1 class="text-center mt-4">TABLEAU DES MEDIAS</h1>
+<h1 class="text-center">TABLEAU DES MEDIAS</h1>
 <div class="row mt-4 justify-content-center">
     <!-- Films-->
-    <div class="col-8 col-xl-8 mb-2">        
+    <div class="col-8 col-xl-8">        
         <div class="card bg-success">
             <div class="card-header bg-white">
                 <div class="d-flex justify-content-center">

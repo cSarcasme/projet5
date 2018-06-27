@@ -1,10 +1,10 @@
 <?php
 /*page modification article manager*/
-namespace ced\Blog\projet4;
+namespace ced\stream\model;
 
 require_once("model/manager.php");
 
-class modifPostManager extends Manager{
+class ModifPostManager extends Manager{
     /*modification of post*/
     public function modifPost($postId, $title, $content, $posted){
         $db=$this->dbConnect();

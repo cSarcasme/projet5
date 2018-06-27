@@ -2,18 +2,14 @@
 <?php $title = "Article";
  ob_start();
 ?>
-<session>
-    <div class="container">
-    <h1 class="text-center mt-4 mb-4">POSTER UN ARTICLE</h1>
-    <!--form of writte a article-->
-        <form method="post" enctype="multipart/form-data">
-            <div class="row">
-                <div class="form-group col-12">
-                    <input type="name" name ="titre" placeholder="titre de l' article" class="form mb-5">
-                </div>
-                <div class="form-group col-12">
-                    <textarea id="writte"name="contenu" placeholder="Contenu de l' article" class="form mb-5"></textarea>
-                <div>
+
+<?php include('body/topbar2.php');?>     
+
+<div class="color">
+    <div class="container-fluid">
+        <section>
+            <div class="container">  
+                <h1 class="text-center">POSTER UN ARTICLE</h1>
                 <!--send article in bbd with condition and errors-->
                 <?php
                     if(isset($_POST['postArticle'])){
@@ -21,7 +17,7 @@
                         $content=trim($_POST['contenu']);	
                         $content = preg_replace("/\s+/", " ", $content);
                         $posted=(isset($_POST['checkbox']));
-                        $writer=$_SESSION['email'];
+                        $writer=$_SESSION['admin']['email'];
                         $errors=array();
 
                         if($posted){
@@ -72,47 +68,37 @@
                             <?php
                         }
                         else{
-                            post_Post($title, $content,$writer, $image, $posted);
+                            $send= new AddArticle;
+                            $send -> post_Post($title, $content,$writer, $image, $posted);
                         }
                     }
                 ?>
+                <!--form of writte a article-->
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group ">
+                        <input type="name" name ="titre" placeholder="titre de l' article" class="form-control formIns  px-2 py-2">
+                    </div>
+                    <div class="form-group ">
+                            <textarea id="writte" name="contenu" placeholder="Contenu de l' article" class="form-control formIns py-2"></textarea>
+                    </div>
+                    <div class="form-group ml-2">
+                        <p class="font-weight-bold">Charger image</p>
+                        <input type="file" class="btn btn-dark"name="file" id="imgInp">
+                    </div>
+                    <div class="material-switch pull-right ml-2">
+                        <p><strong>Public</strong></p> 
+                        <span class="mr-3"> Non</span>
+                        <input id="someSwitchOptionDefault" name="checkbox" type="checkbox" value="on"/>
+                        <label for="someSwitchOptionDefault" class="label-default bg-dark"></label>
+                        <span class="ml-5"> Oui</span>
+                    </div>       
 
-                <div class="row mt-3">
-                    <div class="col-12 col-md-5 mt-3">
-                        <div class="form-group ">
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-default btn-file">
-                                    <button  class="btn btn-info">Charger image</button> <input type="file" name="file" id="imgInp">
-                                    </span>
-                                </span>
-                                <input type="text" class="form2"  readonly>
-                            </div>
-                            <img id='img-upload'/>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 mt-3">
-                        <div class="col-12">
-                            <p><strong>Public</strong></p> 
-                        </div>
-                        <div class="col-12">
-                            <div class="material-switch pull-right">
-                                <span class="mr-3"> Non</span>
-                                <input id="someSwitchOptionDefault" name="checkbox" type="checkbox" value="on"/>
-                                <label for="someSwitchOptionDefault" class="label-default bg-info"></label>
-                                <span class="ml-5"> Oui</span>
-                            </div>       
-                        </div>   
-                    </div>
-                    <div class="col-12 col-md-1 mt-5">
-                        <button type="submit" name="postArticle" class="btn btn-info pl-5 pr-5 ">Publier</button>
-                    </div>
-                </div>     
-            </div>
-        </form>
+                    <button type="submit" name="postArticle" class="font-weight-bold btn btn-success px-5 mt-3 ml-2 ">Publier</button>
+                </form>
+            </div>   
+        </section>
     </div>
-</session>
-
+</div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('view/frontend/template.php'); ?>

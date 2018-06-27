@@ -1,6 +1,6 @@
 <?php
 /*connexion bbd for part admin*/
-namespace ced\Blog\projet4;
+namespace ced\stream\model;
 
 class Manager
 {
